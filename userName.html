@@ -1,0 +1,667 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+
+
+<head>
+    <!-- ========== meta -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="-1" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="Page-Enter" content="blendTrans(Duration=0)" />
+    <meta http-equiv="Page-Exit" content="blendTrans(Duration=0)" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+    <meta name="Fizz00" content="Web2/146/1" />
+    <meta name="Fizz99" content="" />
+    <!-- ========== refresh -->
+
+    <!-- ========== title -->
+
+
+
+    <title>
+        Tech CU Online Banking
+    </title>
+
+
+    <script>
+    </script>
+<link rel="stylesheet" href="style/Default.css">
+<link rel="stylesheet" href="style/99_Pack.css">
+    <!-- ========== ico -->
+    <link rel="icon" type="image/x-icon" href="Files/favicon.ico" />
+    <!-- ========== styles -->
+
+    <!-- ========== StylesAuto enter -->
+    <link href='style/99_Pack.css' rel='stylesheet' type='text/css' />
+    <!-- ========== StylesAuto leave -->
+
+    <link rel="stylesheet" href="style/Default.css">
+    <!-- ========== StylesAutoCustom enter -->
+    <!-- ========== StylesAutoCustom leave -->
+
+
+    <!-- ========== StylesAutoCustomer enter -->
+    <!-- ========== StylesAutoCustomer leave -->
+
+   <!-- <link rel="stylesheet" type="text/css" href="/User/Style/Render/Default?20160309_09" />-->
+
+    <!-- ========== custom - webfont -->
+    <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600,700' rel='stylesheet' type='text/css'>
+
+    <!-- ========== scripts -->
+    <script type="text/javascript">
+        var masterPrint = false;
+    </script>
+
+    <!-- ========== ScriptsAuto enter -->
+    <script type='text/javascript' src='scripts/99_Pack.js'></script>
+    <!-- ========== ScriptsAuto leave -->
+
+
+    <!-- ========== ScriptsAutoCustom enter -->
+    <script type='text/javascript' src='scripts/99_Pack.js'></script>
+    <!-- ========== ScriptsAutoCustom leave -->
+
+
+    <!-- ========== ScriptsAutoCustomer enter -->
+    <!-- ========== ScriptsAutoCustomer leave -->
+
+    <xscript type="javascript" src="https://www.google.com/jsapi"></xscript>
+    <!-- ========== profile -->
+
+    <!-- ========== script -->
+    <script type="text/javascript">
+        //===== extend
+        jQuery.fn.extend({
+            delayedHide: function(time) {
+                var self = this;
+                setTimeout(function() {
+                    self.hide();
+                }, time);
+            },
+            hideDelayed: function(time) {
+                var self = this;
+                setTimeout(function() {
+                    self.hide();
+                }, time);
+            },
+            showDelayed: function(time) {
+                var self = this;
+                setTimeout(function() {
+                    self.show();
+                }, time);
+            },
+            fadeInDelayed: function(time) {
+                var self = this;
+                setTimeout(function() {
+                    self.fadeIn();
+                }, time);
+            },
+            fadeOutDelayed: function(time) {
+                var self = this;
+                setTimeout(function() {
+                    self.fadeOut();
+                }, time);
+            }
+        });
+
+        //===== makeAbsolute
+        jQuery.fn.makeAbsolute = function(rebase) {
+            return this.each(function() {
+                var el = $(this);
+                var pos = el.position();
+                el.css({
+                    position: "absolute",
+                    marginLeft: 0,
+                    marginTop: 0,
+                    top: pos.top,
+                    left: pos.left
+                });
+                if (rebase) el.remove().appendTo("body");
+            });
+        }
+
+        //===== makeAbsoluteAndPosition
+        jQuery.fn.makeAbsoluteAndPosition = function(rebase, selector) {
+            return this.each(function() {
+                var el = $(this);
+                var offset = $(selector).offset();
+                el.css({
+                    position: "absolute",
+                    marginLeft: 0,
+                    marginTop: 0,
+                    top: offset.top,
+                    left: offset.left
+                });
+                if (rebase) el.remove().appendTo("body");
+            });
+        }
+
+        //===== makeAbsoluteAndPositionInside
+        jQuery.fn.makeAbsoluteAndPositionInside = function(rebase, selector) {
+            return this.each(function() {
+                var el = $(this);
+                var offset = $(selector).offset();
+                var slidey = 0;
+                if (offset.top - $(window).scrollTop() + Math.round(el.height()) > $(window).height()) slidey = offset.top - $(window).scrollTop() + Math.round(el.height()) - $(window).height() + 4;
+                el.css({
+                    position: "absolute",
+                    marginLeft: 0,
+                    marginTop: 0,
+                    top: offset.top - slidey,
+                    left: offset.left
+                });
+                if (rebase) el.remove().appendTo("body");
+            });
+        }
+
+        //===== OptionMenu
+        jQuery(function($) {
+            $('span.OptionMenu').one('click', openMenu);
+
+            function openMenu(e) {
+                var button = $(this).addClass('active');
+                var menu = $('#' + button.attr('name'));
+                var offset = button.offset();
+                var h = (button.outerHeight) ? button.outerHeight() : button.height();
+                menu.addClass('active').css({
+                    'top': offset.top + h,
+                    'left': offset.left - 5,
+                    'z-index': 10
+                }).click(function(e) {
+                    e.stopPropagation();
+                }).fadeIn(100, function() {
+                    $(document).one('click', {
+                        button: button,
+                        menu: menu
+                    }, closeMenu);
+                });
+            }
+
+            function closeMenu(e) {
+                e.data.menu.removeClass('active').fadeOut(100, function() {
+                    e.data.button.removeClass('active');
+                });
+                e.data.button.one('click', openMenu);
+            }
+        });
+
+        //===== OptionAccountMenu
+        jQuery(function($) {
+            $('span.OptionAccountMenu').one('click', openMenu);
+
+            function openMenu(e) {
+                var button = $(this).addClass('active');
+                var menu = $('#' + button.attr('name'));
+                var offset = button.offset();
+                var h = (button.outerHeight) ? button.outerHeight() : button.height();
+                menu.addClass('active').css({
+                    'top': offset.top + h,
+                    'left': offset.left - 5,
+                    'z-index': 10
+                }).click(function(e) {
+                    e.stopPropagation();
+                }).fadeIn(100, function() {
+                    $(document).one('click', {
+                        button: button,
+                        menu: menu
+                    }, closeMenu);
+                });
+            }
+
+            function closeMenu(e) {
+                e.data.menu.removeClass('active').fadeOut(100, function() {
+                    e.data.button.removeClass('active');
+                });
+                e.data.button.one('click', openMenu);
+            }
+        })
+
+        //===== OptionPrintMenu
+        jQuery(function($) {
+            $('span.OptionPrintMenu').one('click', openMenu);
+
+            function openMenu(e) {
+                var button = $(this).addClass('active');
+                var menu = $('#' + button.attr('name'));
+                var offset = button.offset();
+                var h = (button.outerHeight) ? button.outerHeight() : button.height();
+                menu.addClass('active').css({
+                    'top': offset.top + h,
+                    'left': offset.left - 5,
+                    'z-index': 10
+                }).click(function(e) {
+                    e.stopPropagation();
+                }).fadeIn(100, function() {
+                    $(document).one('click', {
+                        button: button,
+                        menu: menu
+                    }, closeMenu);
+                });
+            }
+
+            function closeMenu(e) {
+                e.data.menu.removeClass('active').fadeOut(100, function() {
+                    e.data.button.removeClass('active');
+                });
+                e.data.button.one('click', openMenu);
+            }
+        })
+
+        //===== FormatCurrency
+        $(document).ready(function() {
+            $(".FormatCurrency").blur(function(e) {
+                var amount = $(this).val();
+                amount = amount.replace(/[^\-\.0-9]/g, '');
+                if (amount == "") amount = "0";
+                amount = parseFloat(amount).toFixed(2);
+                amount = AddCommas(amount);
+                $(this).val('$' + amount);
+                if (amount == '0.00' && $(this).hasClass('ZeroWatermark')) $(this).val('');
+            })
+        });
+
+        function AddCommas(nStr) {
+            nStr += '';
+            x = nStr.split('.');
+            x1 = x[0];
+            x2 = x.length > 1 ? '.' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(x1)) {
+                x1 = x1.replace(rgx, '$1' + ',' + '$2');
+            }
+            return x1 + x2;
+        }
+
+        function formatAsMoney(amount) {
+            amount += '';
+            amount = amount.replace(/[^\-\.0-9]/g, '');
+            if (amount == "") amount = "0";
+            amount = parseFloat(amount).toFixed(2);
+            var neg = false;
+            if (amount < 0.0) neg = true;
+            amount = Math.abs(amount).toFixed(2);
+
+            amount += '';
+            x = amount.split('.');
+            x1 = x[0];
+            x2 = x.length > 1 ? '.' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(x1)) {
+                x1 = x1.replace(rgx, '$1' + ',' + '$2');
+            }
+            amount = '$' + x1 + x2;
+            if (neg) amount = '(' + amount + ')';
+
+            return amount;
+        }
+
+        function parseFloatOrZero(amount) {
+            amount = amount.replace(/[^\-\.0-9]/g, '');
+            amount = parseFloat(amount);
+            if (isNaN(amount)) return 0.0;
+            amount = parseFloat(amount.toFixed(2));
+            return amount;
+        }
+
+        //===== FormatDate
+        $(document).ready(function() {
+            $(".FormatDate").blur(function(e) {
+                var date = $(this).val().replace(/\D/g, '');
+                if (date.length >= 8) {
+                    date = date.substring(0, 2) + '/' + date.substring(2, 4) + '/' + date.substring(4, 8);
+                    $(this).val(date);
+                }
+            })
+        });
+
+        //===== load
+        $(document).ready(function() {
+
+            //===== topper
+            $('#MainTopper').html($('#MainTopperHidden').html());
+
+            //===== autocomplete
+            $("input").attr("autocomplete", "off");
+        });
+    </script>
+
+
+</head>
+
+<body>
+    <noscript>
+        <div id="MasterNoScript">
+            JavaScript MUST be Active
+        </div>
+    </noscript>
+    <div id="BodyHeader">
+    </div>
+    <div id="MasterBody">
+        <div id="MasterWrap">
+
+
+
+            <div id="MasterHeader" class="" style="padding-bottom: 8px">
+                <div id="MasterHeaderBanner" style="height: 113px">
+                    <div style="position: absolute; top: 0px; left: 8px; width: 159px; height: 80px;">
+                        <a href="https://www.techcu.com" style="width: 250px; height: 62px;
+                display: flex;" target="_blank">
+                <img style="width:80% ;" src="download.png" alt="">
+</a>
+                    </div>
+                    <div id="MasterHeaderTopMenu" class="Right">
+                        <a href="userName.html">Sign In</a>
+                        <a href="#">Register</a> &nbsp;&nbsp;&nbsp;&nbsp;
+
+                    </div>
+
+                    <div style="position:absolute; top:62px; height: 40px; background-color: #e6e4e4; width: 955px;"></div>
+
+                </div>
+            </div>
+
+
+
+            <script type="text/javascript">
+                //===== document ready
+                $(document).ready(function() {
+                    //if ($('#MasterHeaderMenuMainFancy').length == 0) {
+                    //    $("#MasterHeaderMenuMain").attr('id', 'MasterHeaderMenuMainFancy');
+                    //    $("#MasterHeaderMenuMainFancy a").wrapAll(document.createElement("ul"));
+                    //    $("#MasterHeaderMenuMainFancy ul a").wrap(document.createElement("li"));
+                    //    $("#MasterHeaderMenuMainFancy a.MenuCurrent").parent().addClass("MenuCurrent");
+                    //    $("#MasterHeaderMenuMainFancy a").css('margin', '0px')
+                    //    $("#MasterHeaderMenuMainFancy").css('padding', '0px')
+                    //}
+                });
+            </script>
+
+            <div id="MasterMain">
+
+                <script type="text/javascript">
+                    var timeoutCounter = 600;
+                    var timeoutTimer = null;
+
+                    //===== TimeoutProcess
+                    function TimeoutProcess() {}
+
+                    //===== TimeoutReset
+                    function TimeoutReset() {}
+                </script>
+
+                <div id="MainTopper">
+                </div>
+
+
+
+
+                <div class="Sidebar3">
+                    <div class="Round">
+                        <div style="padding: 6px; background-color: #FBFBFB">
+                            <p class="Bold">
+                                Sign In to Online Banking
+                            </p>
+                            <hr />
+                            <p>
+                                Welcome to Tech CU Online Banking, please sign in.
+                            </p>
+                            <p>
+                                <ol>
+                                    <li class="Bold">&gt; Enter Username
+                                    </li>
+                                    <li>
+                                        Enter Password
+                                    </li>
+                                    <li>
+                                        Enter Passcode
+                                    </li>
+                                    <li>
+                                        All Done!
+                                    </li>
+
+                                </ol>
+                            </p>
+                            <br />
+                            <hr />
+                            <b>For assistance please call:</b><br />
+                            <ul>
+                                <li> (800) 553 - 0880 toll free</li>
+                            </ul>
+                            Monday - Friday, 8:00 am - 6:00 pm<br> Saturday, 10:00 am - 2:00 pm <br><br>
+
+                            <p>
+                                <b>Help with Credentials:</b><br />
+                                <ul>
+                                    <li>
+                                        <a href="/User/AccessSigninResetUsername/Reset">Forgot Username?</a>
+                                    </li>
+                                    <li>
+                                        <a href="/User/AccessSigninResetAll/Start">Forgot Everything?</a>
+                                    </li>
+                                    <li>
+                                        <a href="/User/AccessSigninResetLock/Start">Locked?</a>
+                                    </li>
+                                </ul>
+                            </p>
+                            <br />
+                            <hr />
+                            <p>
+
+                                <b>All access is secure and monitored.</b>
+
+                                <br />
+                                <div class="Subtle">
+
+                                    Accessing from &ndash; 41.228.192.49
+                                    <br /> Timestamp &ndash; 07/25/2022 07:36:12
+                                    <br /> Session &ndash; CC332D3BE11E4A49 ...
+
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="Pop" style="text-align: center">
+                        &ndash;&nbsp; For your security &nbsp;&ndash;
+                        <br /> this session is being monitored
+                    </div>
+
+                </div>
+
+                <div class="Content3">
+                    <form action="/User/AccessSignin/Start" id="AccessForm" method="post"><input name='FormInstanceToken' type='hidden' value='25CDCDB9328A4477815797D14D4A98A8' /><noscript><input name='NoJavascript' type='hidden' value='true' /></noscript>
+                        <div class="Round">
+                            <table class="Edit" cellspacing="2px">
+                                <!-- ==================== Title -->
+                                <tr class="Title">
+                                    <td colspan="2">
+
+                                        Sign In &ndash; Welcome to Technology Credit Union
+
+                                    </td>
+                                </tr>
+                                <!-- ==================== Field -->
+                                <tr class="Field">
+                                    <td class="LabelForm">
+                                        Username:
+                                    </td>
+                                    <td class="Value">
+                                        <input autocomplete="off" id="UsernameField" name="UsernameField" style="width: 180px" type="text" value="" /> &nbsp;&nbsp;
+                                        <a href="/User/AccessSignup/Reset">Not Registered?</a>
+                                    </td>
+                                </tr>
+                                <!-- ==================== Action -->
+                                <tr class="Action">
+                                    <td class="Label">
+                                    </td>
+                                    <td class="Value">
+                                        <input id="SubmitNext" name="SubmitNext" type="submit" value="Sign In" />
+                                        <input id="SubmitCancel" name="SubmitCancel" type="submit" value="Cancel" />
+
+                                        <span class='SubmitWorking' style='display: none'>
+<img alt='' src='/User/Content/Images/Spinner.gif' style='vertical-align: middle' /> please wait ... 
+</span>
+
+                                    </td>
+                                </tr>
+                                <!-- ==================== Field -->
+                                <tr class="Field">
+                                    <td class="LabelForm">
+                                    </td>
+                                    <td class="Value">
+                                        For security reasons, please never share your username, password, social security number, account numbers or other private data.
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </form>
+
+
+
+                    <div style="text-align: center">
+                        <a href="/User/AccessSignin/Reset">Sign In</a> &nbsp;&nbsp;
+                        <a href="/User/AccessSignup/Reset">Register</a> &nbsp;&nbsp; &ndash; &nbsp;&nbsp;
+                        <a href="/User/AccessSigninResetUsername/Reset">Forgot Username?</a> &nbsp;&nbsp;
+                        <a href="/User/AccessSigninResetPassword/Reset">Forgot Password?</a> &nbsp;&nbsp;
+                        <a href="/User/AccessSigninResetAll/Start">Forgot Everything?</a> &nbsp;&nbsp; &ndash; &nbsp;&nbsp;
+                        <a href="/User/AccessSigninResetLock/Start">Locked?</a>
+                    </div>
+
+                </div>
+
+
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $('#UsernameField')[0].focus();
+                    });
+                </script>
+
+
+                <script type="text/javascript">
+                </script>
+
+                <div id="MainTopperHidden" style="display: none">
+
+                    <div id="Message">
+                        <div class="Round">
+                            <br/>
+                            <font color="red"><b> Maintenance Notice: </b></font> “Due to system maintenance, Tech CU’s Online Banking, Business Online Banking, Call-24 Phone Banking, Mobile Banking, and ATMs will be unavailable on Saturday, July 23rd from 7:00 p.m. up
+                            to 11:00 p.m. Non-Tech CU Partner Network ATMs will remain available to serve you. We apologize for any inconvenience. <br/>
+                            <html>
+                        </div>
+                    </div>
+
+
+                    <div id="SlotBrowser" style="display: none">
+                        <div class="Round">
+                            <ul style="padding-top: 0px; padding-bottom: 0px">
+                                <li>You are using a pretty old web browser, for a better online experience please consider upgrading &ndash; click for the latest &nbsp; <a href="https://www.microsoft.com/ie" target="_blank">Internet Explorer</a> &nbsp;
+                                    <a
+                                        href="http://www.getfirefox.com" target="_blank">Firefox</a> &nbsp; <a href="https://www.google.com/chrome" target="_blank">
+                            Chrome</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--[if lte IE 7]>
+<script type="text/javascript">
+    $('#SlotBrowser').show();
+</script>
+<![endif]-->
+                    <noscript>
+    <div id="SlotJavaScript" class="Round">
+        JavaScript must be enabled for this site to function properly
+    </div>
+</noscript>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="BodyFooter">
+
+
+        <div id="MasterFooter">
+            <div style="width:840px; height: 70px; margin-left:auto; margin-right:auto">If you are using a screen reader or other auxiliary aid and are having problems using this website, please call (800) 553-0880 for assistance. Also, all products, services and information mentioned on this website are available at any of our
+                physical branches, where we would be happy to assist you further.</div>
+            <div style="width:960px; height: 70px; margin-left:auto; margin-right:auto">
+                <div>
+                    <img style="float: left" src="Files/55C47C39601DD97FDCFFB7B24F862BB8.png" alt="Insured Logos" title="Insured Logos" />
+                </div>
+                <div style="float: left;">
+                    <div style="margin-left: 150px;font-weight: bold;"><a style="color: #2c2c2c; font-size: 10px;" href="https://www.techcu.com/Personal/Services/Online-Banking/Terms-and-Conditions/" target="_blank">Online Banking Terms</a> |&nbsp; <a style="color: #2c2c2c; font-size: 10px;" href="https://www.techcu.com/Personal/Services/Online-Banking/Bill-Pay-Terms-and-Conditions/"
+                            target="_blank">Bill Pay Terms</a> |&nbsp;
+                        <A style="color: #2c2c2c; font-size: 10px;" title="Disclosures & Privacy" href="https://www.techcu.com/Resources/Disclosures/" target="_blank">
+         Disclosure</A> |&nbsp;
+                        <A style="color: #2c2c2c; font-size: 10px;" title="Fraud & Security" href="https://www.techcu.com/Resources/Privacy-and-Security/" target="_blank">
+         Privacy & Security</A> |&nbsp; <a style="color: #2c2c2c; font-size: 10px;" href="https://www.techcu.com/Resources/Accessibility-Statement/" target="_blank">Accessibility Statement</a>
+                    </div>
+                    <div id="copyright" style="margin-left: 150px;color: #2c2c2c; font-size: 10px;font-weight: bold;">&copy;Technology Credit Union. All rights reserved&nbsp;
+                        <A style="color: #2c2c2c; font-size: 10px;font-weight: bold;" title="ABA/Routing Number" href="https://www.techcu.com/Resources/ABA-Routing-Number-and-Instructions-for-Electronic-Transfers/"
+                            target="blank">ABA/Routing Number</A>: 121181976 &nbsp;|&nbsp; NMLS ID #551926
+                    </div>
+                </div>
+                <div style="background: no-repeat; display: block; ">
+                    <h4 style=" font-size: 9.5px; font-weight: bold; color:#2c2c2c; text-transform:uppercase; text-align:right; margin-right:17px; margin-bottom:1px; letter-spacing:1px">Connect with us</h4>
+                </div>
+                <div style="background: no-repeat; display: block; text-align:right;margin-right:17px; ">
+                    <a title="YouTube" href="https://www.youtube.com/user/techcublog" target="blank"><img src="Files/FileYouTube22.png"   alt="YouTube" /></a>
+                    <a title="LinkedIn" href="https://www.linkedin.com/company/TechCU" target="blank"><img src="Files//FileLinkedIn22.png"  alt="LinkedIn" /></a>
+                    <a title="Facebook" href="https://www.facebook.com/TechCU" target="blank"><img src="Files//FileFacebook22.png"  alt="Facebook" /></a>
+                    <a title="Twitter" href="https://twitter.com/TechCU" target="blank"><img src=" Files//FileTwitter22.png"  alt="Twitter" /></a>
+                    <a title="Instagram" href="https://www.instagram.com/TechCU/" target="blank"><img src=" Files//FileInstaGram.png"  alt="Instagram" /></a>
+                </div>
+            </div>
+
+        </div>
+
+        <script type="text/javascript">
+        </script>
+
+
+        <div style="text-align: center; color: #C0C0C0">
+            &ndash; Current time is 7/25/2022 7:36:12 AM &ndash; 0 &ndash; W2 &ndash;
+        </div>
+
+
+
+        <script type="text/javascript">
+        </script>
+
+    </div>
+
+    <script type="text/javascript">
+    </script>
+
+    <div>
+        <form action="">
+            <input type="hidden" name="PageDone" />
+            <input type="hidden" name="" />
+        </form>
+    </div>
+
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-380671-15', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+</body>
+
+</html>
